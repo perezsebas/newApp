@@ -23,13 +23,13 @@
 
     <ion-buttons>
       <button ion-button (click)="updateItem(item.key, updateAbout.value)" block>
-        Update
+        {{ 'UPDATE_BUTTON' | translate }}
       </button>
     </ion-buttons>
 
     <ion-buttons>
       <button ion-button color="danger" (click)="deleteItem(item.key)" block>
-        Delete
+        {{ 'DELETE_BUTTON' | translate }}
       </button>
     </ion-buttons>
 
