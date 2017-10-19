@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
 
 import { Camera } from '@ionic-native/camera';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-item-create',
@@ -18,7 +20,14 @@ export class ItemCreatePage {
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  items: Observable<any[]>;
+
+  constructor(
+    public navCtrl: NavController,
+    public viewCtrl: ViewController,
+    formBuilder: FormBuilder,
+    public camera: Camera,
+    public db: AngularFireDatabase) {
     this.form = formBuilder.group({
       profilePic: [''],
       name: ['', Validators.required],
@@ -29,6 +38,7 @@ export class ItemCreatePage {
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+
   }
 
   ionViewDidLoad() {
@@ -79,6 +89,13 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
+    this.db.list('users').push({
+      name: this.form.controls.name.value,
+      about: this.form.controls.about.value
+    });
+
+    this.db.list('users').remove('-KwpIA7N6HIAq0JN3eON');
+
     this.viewCtrl.dismiss(this.form.value);
   }
 }

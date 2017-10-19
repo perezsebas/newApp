@@ -7,6 +7,9 @@ import { Item } from '../../models/item';
 
 import { Items } from '../../providers/providers';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'page-search',
@@ -16,7 +19,11 @@ export class SearchPage {
   
   currentItems: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams, 
+    public items: Items
+    ) { }
 
   /**
    * Perform a service for the proper items.
@@ -40,5 +47,5 @@ export class SearchPage {
       item: item
     });
   }
-
+  
 }
