@@ -21,8 +21,7 @@ import { FirebaseApp } from 'angularfire2';
 export class ListMasterPage {
   // currentItems: Item[];
   currentItems: Observable<any[]>;
-  image: string;
-  // storage = firebase.storage().ref();
+  // image: string;
 
   constructor(
     public navCtrl: NavController,
@@ -32,11 +31,9 @@ export class ListMasterPage {
     public db: AngularFireDatabase) {
     // this.currentItems = this.items.query();
 
-    const storage = st.storage();
-    const ref = storage.ref().child('speakers/lion.jpg');
-    ref.getDownloadURL().then(url => this.image = url);
-
-    console.log(this.image);
+    // const storage = st.storage();
+    // const ref = storage.ref().child('speakers/lion.jpg');
+    // ref.getDownloadURL().then(url => this.image = url);
 
     // this.currentItems = db.list('users').valueChanges();
 
