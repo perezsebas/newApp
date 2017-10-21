@@ -15,7 +15,6 @@ import { FirebaseApp } from 'angularfire2';
 })
 export class ItemDetailPage {
   item: any;
-  image: string;
 
   constructor(public navCtrl: NavController,
     navParams: NavParams,

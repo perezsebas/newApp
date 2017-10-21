@@ -35,7 +35,6 @@ export class ItemCreatePage {
     public db: AngularFireDatabase) {
     this.form = formBuilder.group({
       profilePic: [''],
-      image: [''],
       name: ['', Validators.required],
       about: ['']
     });
@@ -59,7 +58,6 @@ export class ItemCreatePage {
     //     targetHeight: 96
     //   }).then((data) => {
     //     this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-    //     this.form.patchValue({ 'image': 'data:image/jpg;base64,' + data });
     //   }, (err) => {
     //     alert('Unable to take photo');
     //   })
@@ -74,7 +72,6 @@ export class ItemCreatePage {
 
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
-      this.form.patchValue({ 'image': imageData });
       this.imageDataFB = imageData;
     };
 
@@ -103,8 +100,7 @@ export class ItemCreatePage {
     this.db.list('users').push({
       name: this.form.controls['name'].value,
       about: this.form.controls['about'].value,
-      profilePic: this.form.controls['profilePic'].value,
-      image: this.form.controls['image'].value
+      profilePic: this.form.controls['profilePic'].value
     });
 
     //Create file in Firebase storage
