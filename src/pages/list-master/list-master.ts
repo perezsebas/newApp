@@ -21,7 +21,7 @@ import { FirebaseApp } from 'angularfire2';
 export class ListMasterPage {
   // currentItems: Item[];
   currentItems: Observable<any[]>;
-  // image: string;
+  // image: any;
 
   constructor(
     public navCtrl: NavController,
@@ -40,6 +40,18 @@ export class ListMasterPage {
     this.currentItems = db.list('users').snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
+
+    // this.currentItems.forEach(element => {
+    //   element.forEach(element => {
+    //     const storage = st.storage();
+    //     const ref = storage.ref().child(element.profilePic);
+    //     ref.getDownloadURL().then(url => element.FBimage = url);
+    //     // this.db.list('users').update(element.key, { image: element.image });
+    //     console.log(element);
+    //   });
+    // });
+
+    
   }
 
   /**
@@ -57,6 +69,7 @@ export class ListMasterPage {
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
+        console.log(item);
       }
     })
     addModal.present();

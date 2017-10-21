@@ -24,17 +24,32 @@ export class ItemDetailPage {
     public st: FirebaseApp) {
     this.item = navParams.get('item') || items.defaultItem;
 
-    // const ref = storage.ref().child('speakers/lion.jpg');
-    const ref = st.storage().ref().child(this.item.profilePic); 
-    ref.getDownloadURL().then(url => this.image = url);
+    // const ref = st.storage().ref().child('speakers');
+    // console.log(ref);
+
+    // const ref = st.storage().ref().child(this.item.profilePic); 
+    // ref.getDownloadURL().then(url => this.image = url);
   }
 
   updateItem(key: string, newText: string) {
     this.db.list('users').update(key, { about: newText });
   }
 
-  deleteItem(key: string) {    
+  deleteItem(name: string, key: string) {
+    //Delete from Firebase DB
     this.db.list('users').remove(key);
+
+    //Delete from Firebase storage
+    let storageRef = this.st.storage().ref();
+    let imageName = 'speakers/' + name;
+    let uploadTask = storageRef.child(imageName).delete()
+      .then(function () {
+        console.log('succes');
+      }).catch(function (error) {
+        console.log(error);
+      });;
+
+    //Send to ListerMasterPage view
     this.navCtrl.push(ListMasterPage);
   }
 

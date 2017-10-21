@@ -8,9 +8,9 @@
 
 
 <ion-content>
-  <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'"> -->
+  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.image + ')'">
 
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + image + ')'">
+  <!-- <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + image + ')'"> -->
 
   </div>
 
@@ -31,7 +31,7 @@
     </ion-buttons>
 
     <ion-buttons>
-      <button ion-button color="danger" (click)="deleteItem(item.key)" block>
+      <button ion-button color="danger" (click)="deleteItem(item.name, item.key)" block>
         {{ 'DELETE_BUTTON' | translate }}
       </button>
     </ion-buttons>

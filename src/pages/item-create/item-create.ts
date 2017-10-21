@@ -7,6 +7,8 @@ import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
+import { FirebaseApp } from 'angularfire2';
+
 @Component({
   selector: 'page-item-create',
   templateUrl: 'item-create.html'
@@ -22,14 +24,18 @@ export class ItemCreatePage {
 
   items: Observable<any[]>;
 
+  imageDataFB: any;
+
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     formBuilder: FormBuilder,
     public camera: Camera,
+    public st: FirebaseApp,
     public db: AngularFireDatabase) {
     this.form = formBuilder.group({
       profilePic: [''],
+      image: [''],
       name: ['', Validators.required],
       about: ['']
     });
@@ -67,6 +73,8 @@ export class ItemCreatePage {
 
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
+      this.form.patchValue({ 'image': imageData });
+      this.imageDataFB = imageData;
     };
 
     reader.readAsDataURL(event.target.files[0]);
@@ -89,13 +97,21 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
+
+    //Create register in Firebase DB
     this.db.list('users').push({
-      name: this.form.controls.name.value,
-      about: this.form.controls.about.value
+      name: this.form.controls['name'].value,
+      about: this.form.controls['about'].value,
+      profilePic: this.form.controls['profilePic'].value,
+      image: this.form.controls['image'].value
     });
 
-    this.db.list('users').remove('-KwpIA7N6HIAq0JN3eON');
+    //Create file in Firebase storage
+    let storageRef = this.st.storage().ref();
+    let imageName = 'speakers/' + this.form.controls['name'].value;
+    let uploadTask = storageRef.child(imageName).putString(this.imageDataFB, 'data_url');
 
+    //Close modal and back to view
     this.viewCtrl.dismiss(this.form.value);
   }
 }
