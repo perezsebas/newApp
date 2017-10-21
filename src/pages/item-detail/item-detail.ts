@@ -36,7 +36,7 @@ export class ItemDetailPage {
     //Delete from Firebase storage
     let storageRef = this.st.storage().ref();
     let imageName = 'speakers/' + name;
-    let uploadTask = storageRef.child(imageName).delete()
+    storageRef.child(imageName).delete()
       .then(function () {
         console.log('succes');
       }).catch(function (error) {
