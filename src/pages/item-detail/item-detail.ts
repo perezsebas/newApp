@@ -23,12 +23,6 @@ export class ItemDetailPage {
     public db: AngularFireDatabase,
     public st: FirebaseApp) {
     this.item = navParams.get('item') || items.defaultItem;
-
-    // const ref = st.storage().ref().child('speakers');
-    // console.log(ref);
-
-    // const ref = st.storage().ref().child(this.item.profilePic); 
-    // ref.getDownloadURL().then(url => this.image = url);
   }
 
   updateItem(key: string, newText: string) {

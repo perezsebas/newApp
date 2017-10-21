@@ -30,11 +30,6 @@ export class ListMasterPage {
     public st: FirebaseApp,
     public db: AngularFireDatabase) {
     // this.currentItems = this.items.query();
-
-    // const storage = st.storage();
-    // const ref = storage.ref().child('speakers/lion.jpg');
-    // ref.getDownloadURL().then(url => this.image = url);
-
     // this.currentItems = db.list('users').valueChanges();
 
     this.currentItems = db.list('users').snapshotChanges().map(changes => {
