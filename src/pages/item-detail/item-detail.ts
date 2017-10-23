@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ItemDetailPage {
   item: any;
-  message: string;
+  updateMessage: string;
   deleteMessages: string[];
 
   constructor(public navCtrl: NavController,
@@ -28,21 +28,28 @@ export class ItemDetailPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     private translate: TranslateService) {
+
     this.item = navParams.get('item') || items.defaultItem;
+
+    //Get translated value
+    this.translate.get('USER_UPDATED').subscribe((res: string) => {
+      this.updateMessage = res;
+    });
+
+    //Get translated values
+    this.translate.get(['DELETE_BUTTON', 'DELETE_USER_CONFIRMATION', 'CANCEL_BUTTON', 'CONFIRMATION' ]).subscribe((res: string[]) => {  
+      this.deleteMessages = res;
+    });
+
   }
 
   updateItem(key: string, newText: string) {
     //Update values in Firebase DB
     this.db.list('users').update(key, { about: newText });
 
-    //Get translated value
-    this.translate.get('USER_UPDATED').subscribe((res: string) => {
-      this.message = res;
-    });
-
     //Show toast with confirmation message
     let toast = this.toastCtrl.create({
-      message: this.message,
+      message: this.updateMessage,
       duration: 3000,
       position: 'top',
       cssClass: 'greenBG'
@@ -52,16 +59,6 @@ export class ItemDetailPage {
   }
 
   deleteItem(name: string, key: string) {
-    //Call confirmation alert
-    this.deleteConfirm(name, key);
-  }
-
-  deleteConfirm(name: string, key: string) {
-    //Get translated value
-    this.translate.get(['DELETE_BUTTON', 'DELETE_USER_CONFIRMATION', 'CANCEL_BUTTON', 'CONFIRMATION' ]).subscribe((res: string[]) => {  
-      this.deleteMessages = res;
-    });
-
     //Show alert with confirmation message
     let alert = this.alertCtrl.create({
       title: this.deleteMessages['CONFIRMATION'],

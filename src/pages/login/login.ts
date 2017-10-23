@@ -7,6 +7,8 @@ import { User } from '../../providers/user';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Component({
   selector: 'page-login',
@@ -17,8 +19,8 @@ export class LoginPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+    email: 'perezsebas1@gmail.com',
+    password: '123456'
   };
 
   // Our translated text strings
@@ -27,7 +29,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public afAuth: AngularFireAuth) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
@@ -36,11 +39,10 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
+    //Log in to Firebase Authentication
+    this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password).then((res) => {
       this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
+    }).catch((err) => {
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
         duration: 3000,
@@ -48,5 +50,20 @@ export class LoginPage {
       });
       toast.present();
     });
+
+    // this.user.login(this.account).subscribe((resp) => {
+    //   this.navCtrl.push(MainPage);
+    // }, (err) => {
+    //   //Redirect to Main Page
+    //   // this.navCtrl.push(MainPage);
+    //   // Unable to log in
+    //   let toast = this.toastCtrl.create({
+    //     message: this.loginErrorString,
+    //     duration: 3000,
+    //     position: 'top'
+    //   });
+    //   toast.present();
+    // });
+
   }
 }
