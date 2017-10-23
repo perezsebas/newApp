@@ -11,4 +11,15 @@ page-item-detail {
     background: white;
     position: absolute;
   }
+
+}
+
+.greenBG {
+  > div{
+    background-color: green!important;
+  }
+}
+
+.deleteButton {
+    color: red!important;
 }

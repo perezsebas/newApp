@@ -24,7 +24,7 @@ export class ItemCreatePage {
 
   items: Observable<any[]>;
 
-  imageDataFB: any;
+  imageDataFB: any = null;
 
   constructor(
     public navCtrl: NavController,
@@ -62,7 +62,7 @@ export class ItemCreatePage {
     //     alert('Unable to take photo');
     //   })
     // } else {
-      this.fileInput.nativeElement.click();
+    this.fileInput.nativeElement.click();
     //}
   }
 
@@ -104,9 +104,11 @@ export class ItemCreatePage {
     });
 
     //Create file in Firebase storage
-    let storageRef = this.st.storage().ref();
-    let imageName = 'speakers/' + this.form.controls['name'].value;
-    let uploadTask = storageRef.child(imageName).putString(this.imageDataFB, 'data_url');
+    if (this.imageDataFB !== null) {
+      let storageRef = this.st.storage().ref();
+      let imageName = 'speakers/' + this.form.controls['name'].value;
+      let uploadTask = storageRef.child(imageName).putString(this.imageDataFB, 'data_url');
+    }
 
     //Close modal and back to view
     this.viewCtrl.dismiss(this.form.value);
