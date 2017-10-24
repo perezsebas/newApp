@@ -16,18 +16,31 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'search.html'
 })
 export class SearchPage {
-  
+
   currentItems: any = [];
+  // currentItems: Observable<any[]>;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams, 
-    public items: Items
-    ) { }
+    public navParams: NavParams,
+    public items: Items,
+    public db: AngularFireDatabase) {
+
+  }
 
   /**
    * Perform a service for the proper items.
    */
+
+  // getItems(ev) {
+
+  //   this.currentItems.query = this.db.list('users/', ref => {
+  //     console.log(ref);
+  //     return ref//.orderByChild('name').equalTo('Burt Bear');
+  //   });
+ 
+  // }
+
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
@@ -47,5 +60,5 @@ export class SearchPage {
       item: item
     });
   }
-  
+
 }

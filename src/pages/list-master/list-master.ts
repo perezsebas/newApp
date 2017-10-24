@@ -11,7 +11,7 @@ import { Item } from '../../models/item';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-import { FirebaseApp } from 'angularfire2';
+// import { FirebaseApp } from 'angularfire2';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class ListMasterPage {
     public navCtrl: NavController,
     public items: Items,
     public modalCtrl: ModalController,
-    public st: FirebaseApp,
+    // public st: FirebaseApp,
     public db: AngularFireDatabase) {
     // this.currentItems = this.items.query();
     // this.currentItems = db.list('users').valueChanges();

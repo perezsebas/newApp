@@ -5,7 +5,7 @@
   "EMAIL": "Email",
   "USERNAME": "Username",
   "PASSWORD": "Password",
-  "LOGIN": "Log in",
+  "LOGIN": "Log in", 
   "SIGNUP": "Sign up",
 
   "TAB1_TITLE": "Items",
@@ -48,6 +48,9 @@
   "SIGNUP_TITLE": "Sign up",
   "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
   "SIGNUP_BUTTON": "Sign up",
+  "SIGNOUT_BUTTON": "Sign out",
+  "LOGIN_GOOGLE_BUTTON": "Log in with Google", 
+  "LOGIN_FACEBOOK_BUTTON": "Log in with Facebook", 
 
   "LIST_MASTER_TITLE": "Items",
 
@@ -60,16 +63,16 @@
   "DONE_BUTTON" : "Done",
   "CANCEL_BUTTON" : "Cancel",
   "DELETE_BUTTON" : "Delete",
-  "UPDATE_BUTTON": "Update",
+  "UPDATE_BUTTON": "Update", 
 
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER" : "Search the items list, e.g. \"Donald Duck\"",
 
-  "USER_UPDATED": "User updated successfully",
+  "USER_UPDATED": "User updated successfully", 
 
-  "DELETE_USER_CONFIRMATION": "Are you sure to delete this user?",
+  "DELETE_USER_CONFIRMATION": "Are you sure to delete this user?", 
 
-  "CONFIRMATION": "Confirmation"
+  "CONFIRMATION": "Confirmation" 
 }

@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
-
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html'
@@ -40,17 +39,17 @@ export class SignupPage {
   doSignup() {
     //Sign up to Firebase Authentication
     this.afAuth.auth.createUserWithEmailAndPassword(this.account.email, this.account.password)
-    .then((res) => {
-      // console.log(res);
-      this.navCtrl.push(MainPage);
-    }).catch((err) => {
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
+      .then((res) => {
+        // console.log(res);
+        this.navCtrl.push(MainPage);
+      }).catch((err) => {
+        let toast = this.toastCtrl.create({
+          message: this.signupErrorString,
+          duration: 2000,
+          position: 'top'
+        });
+        toast.present();
       });
-      toast.present();
-    });
 
     // Attempt to login in through our User service
     // this.user.signup(this.account).subscribe((resp) => {
@@ -69,4 +68,5 @@ export class SignupPage {
     // });
 
   }
+
 }

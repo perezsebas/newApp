@@ -8,7 +8,7 @@ import { User } from '../../providers/user';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'page-login',
@@ -43,12 +43,7 @@ export class LoginPage {
     this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password).then((res) => {
       this.navCtrl.push(MainPage);
     }).catch((err) => {
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.showToast(this.loginErrorString);
     });
 
     // this.user.login(this.account).subscribe((resp) => {
@@ -66,4 +61,37 @@ export class LoginPage {
     // });
 
   }
+
+  signUpWithGoogle() {
+    //Sign up with Google
+    let provider = new firebase.auth.GoogleAuthProvider();
+    this.afAuth.auth.signInWithRedirect(provider)
+      .then((res) => {
+        console.log('success');
+        this.navCtrl.push(MainPage);
+      }).catch((err) => {
+        this.showToast(err);
+      });
+  }
+
+  signOut() {
+    //Sign out
+    this.afAuth.auth.signOut()
+      .then((res) => {
+        console.log('logged out');
+        // this.navCtrl.push(MainPage);
+      }).catch((err) => {
+        this.showToast(err);
+      });
+  }
+
+  showToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
 }

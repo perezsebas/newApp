@@ -36,4 +36,17 @@
 
     </ion-list>
   </form>
+
+  <ion-buttons padding>
+    <button ion-button color="danger" (click)="signUpWithGoogle()" block>
+      {{ 'LOGIN_GOOGLE_BUTTON' | translate }}
+    </button>
+  </ion-buttons>
+
+  <ion-buttons padding>
+    <button ion-button color="secondary" (click)="signOut()" block>
+      {{ 'SIGNOUT_BUTTON' | translate }}
+    </button>
+  </ion-buttons>
+
 </ion-content>

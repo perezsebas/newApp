@@ -50,7 +50,7 @@ export class ItemDetailPage {
     //Show toast with confirmation message
     let toast = this.toastCtrl.create({
       message: this.updateMessage,
-      duration: 3000,
+      duration: 2000,
       position: 'top',
       cssClass: 'greenBG'
     });
