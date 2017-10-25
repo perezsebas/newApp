@@ -17,8 +17,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SearchPage {
 
-  currentItems: any = [];
-  // currentItems: Observable<any[]>;
+  filteredItems: any = [];
+  currentItems: Observable<any[]>;
 
   constructor(
     public navCtrl: NavController,
@@ -26,31 +26,43 @@ export class SearchPage {
     public items: Items,
     public db: AngularFireDatabase) {
 
+    this.currentItems = this.db.list('users').snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+
   }
 
   /**
    * Perform a service for the proper items.
    */
 
-  // getItems(ev) {
-
-  //   this.currentItems.query = this.db.list('users/', ref => {
-  //     console.log(ref);
-  //     return ref//.orderByChild('name').equalTo('Burt Bear');
-  //   });
- 
-  // }
-
   getItems(ev) {
     let val = ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentItems = [];
-      return;
+    if ((val !== "") && (val !== undefined)) {
+      this.currentItems.subscribe(res => {
+        this.filteredItems = [];
+        res.forEach((item: any) => {
+          if ((item.name.toLowerCase().indexOf(val.toLowerCase()) > -1)) {
+            this.filteredItems.push(item);
+          }
+        });
+      });
+    } else {
+      this.filteredItems = [];
     }
-    this.currentItems = this.items.query({
-      name: val
-    });
+
   }
+
+  // getItems(ev) {
+  //   let val = ev.target.value;
+  //   if (!val || !val.trim()) {
+  //     this.currentItems = [];
+  //     return;
+  //   }
+  //   this.currentItems = this.items.query({
+  //     name: val
+  //   });
+  // }
 
   /**
    * Navigate to the detail page for this item.
