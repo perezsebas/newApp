@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
 import { MainPage } from '../../pages/pages';
+import { WelcomePage } from '../../pages/welcome/welcome';
 
 import { User } from '../../providers/user';
 
@@ -62,24 +63,23 @@ export class LoginPage {
 
   }
 
-  signUpWithGoogle() {
+  logInWithGoogle() {
     //Sign up with Google
     let provider = new firebase.auth.GoogleAuthProvider();
     this.afAuth.auth.signInWithRedirect(provider)
-      .then((res) => {
-        console.log('success');
+      .then( () => {
         this.navCtrl.push(MainPage);
       }).catch((err) => {
         this.showToast(err);
       });
+      
   }
 
   signOut() {
     //Sign out
     this.afAuth.auth.signOut()
       .then((res) => {
-        console.log('logged out');
-        // this.navCtrl.push(MainPage);
+        this.navCtrl.push(WelcomePage);
       }).catch((err) => {
         this.showToast(err);
       });

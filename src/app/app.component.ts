@@ -43,7 +43,7 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class MyApp {
   // rootPage = FirstRunPage;
-  rootPage = SearchPage;
+  rootPage = TabsPage;
 
   @ViewChild(Nav) nav: Nav;
 
