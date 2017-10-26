@@ -86,7 +86,7 @@ export class ItemCreatePage {
    * The user cancelled, so we dismiss without sending data back.
    */
   cancel() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();  
   }
 
   /**
