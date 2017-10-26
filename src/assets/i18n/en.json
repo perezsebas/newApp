@@ -33,7 +33,7 @@
   "SETTINGS_TITLE": "Settings",
   "SETTINGS_OPTION1": "Option 1",
   "SETTINGS_OPTION2": "Option 2",
-  "SETTINGS_OPTION3": "Option 3",
+  "LANGUAGE_OPTION": "Language",
   "SETTINGS_OPTION4": "Option 4",
 
   "SETTINGS_PROFILE_BUTTON" : "Edit Profile",
@@ -74,5 +74,7 @@
 
   "DELETE_USER_CONFIRMATION": "Are you sure to delete this user?", 
 
-  "CONFIRMATION": "Confirmation" 
+  "CONFIRMATION": "Confirmation",
+
+  "LOADING_MESSAGE": "Loading"
 }

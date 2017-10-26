@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, LoadingController } from 'ionic-angular';
 
 import { ItemCreatePage } from '../item-create/item-create';
 import { ItemDetailPage } from '../item-detail/item-detail';
@@ -27,14 +27,15 @@ export class ListMasterPage {
     public navCtrl: NavController,
     public items: Items,
     public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
     // public st: FirebaseApp,
     public db: AngularFireDatabase) {
     // this.currentItems = this.items.query();
     // this.currentItems = db.list('users').valueChanges();
 
-    this.currentItems = db.list('users').snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
+    // this.currentItems = db.list('users').snapshotChanges().map(changes => {
+    //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    // });
 
     // this.currentItems.forEach(element => {
     //   element.forEach(element => {
@@ -53,6 +54,14 @@ export class ListMasterPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+    let loader = this.loadingCtrl.create();
+
+    loader.present().then(()=>{
+      this.currentItems = this.db.list('users').snapshotChanges().map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));  
+      });
+      loader.dismiss();
+    });
   }
 
   /**

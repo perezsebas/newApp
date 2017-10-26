@@ -38,8 +38,7 @@ export class SettingsPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
-  }
+    public translate: TranslateService) {}
 
   _buildForm() {
     let group: any = {
@@ -62,6 +61,9 @@ export class SettingsPage {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.settings.merge(this.form.value);
+
+      this.translate.use('en');
+
     });
   }
 

@@ -37,12 +37,12 @@ export class SearchPage {
    */
 
   getItems(ev) {
-    let val = ev.target.value.toLowerCase();
+    let val = ev.target.value;
     if ((val !== "") && (val !== undefined)) {
       this.currentItems.subscribe(res => {
         this.filteredItems = [];
         res.forEach((item: any) => {
-          if ((item.name.toLowerCase().indexOf(val) > -1)) {
+          if ((item.name.toLowerCase().indexOf(val.toLowerCase()) > -1)) {
             this.filteredItems.push(item);
           }
         });
