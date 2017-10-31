@@ -1,7 +1,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <!-- <ion-title>{{ pageTitle }}</ion-title> -->
+    <ion-title>{{ 'SETTINGS_TITLE' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -28,17 +29,18 @@
         </ion-select>
       </ion-item>
 
-      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
+      <!-- <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
         {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
-      </button>
+      </button> -->
     </ion-list>
 
-    <ion-list *ngIf="page == 'profile'">
+    <!-- <ion-list *ngIf="page == 'profile'">
       <ion-item>
         <ion-label>{{ 'SETTINGS_OPTION4' | translate }}</ion-label>
         <ion-input formControlName="option4"></ion-input>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
+
   </form>
 
 </ion-content>

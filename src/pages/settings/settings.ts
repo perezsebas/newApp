@@ -23,22 +23,30 @@ export class SettingsPage {
 
   form: FormGroup;
 
-  profileSettings = {
-    page: 'profile',
-    pageTitleKey: 'SETTINGS_PAGE_PROFILE'
-  };
+  // profileSettings = {
+  //   page: 'profile',
+  //   pageTitleKey: 'SETTINGS_PAGE_PROFILE'
+  // };
 
   page: string = 'main';
-  pageTitleKey: string = 'SETTINGS_TITLE';
-  pageTitle: string;
+  // pageTitleKey: string = 'SETTINGS_TITLE';
+  // pageTitle: string;
 
-  subSettings: any = SettingsPage;
+  // subSettings: any = SettingsPage;
 
-  constructor(public navCtrl: NavController,
+  //Language variables
+  language: string;
+  english: number = 1;
+  spanish: number = 2;
+
+  constructor(
+    public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {}
+    public translate: TranslateService) {
+
+    }
 
   _buildForm() {
     let group: any = {
@@ -47,22 +55,27 @@ export class SettingsPage {
       option3: [this.options.option3]
     };
 
-    switch (this.page) {
-      case 'main':
-        break;
-      case 'profile':
-        group = {
-          option4: [this.options.option4]
-        };
-        break;
-    }
+    // switch (this.page) {
+    //   case 'main':
+    //     break;
+    //   case 'profile':
+    //     group = {
+    //       option4: [this.options.option4]
+    //     };
+    //     break;
+    // }
     this.form = this.formBuilder.group(group);
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.settings.merge(this.form.value);
 
-      this.translate.use('en');
+      this.language = this.form.controls.option3.value;
+      if(this.language === this.english.toString()){
+        this.translate.use('en');
+      }else if(this.language === this.spanish.toString()){
+        this.translate.use('es');
+      }
 
     });
   }
@@ -76,12 +89,12 @@ export class SettingsPage {
     // Build an empty form for the template to render
     this.form = this.formBuilder.group({});
 
-    this.page = this.navParams.get('page') || this.page;
-    this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
-
-    this.translate.get(this.pageTitleKey).subscribe((res) => {
-      this.pageTitle = res;
-    })
+    // this.page = this.navParams.get('page') || this.page;
+    // this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
+    //
+    // this.translate.get(this.pageTitleKey).subscribe((res) => {
+    //   this.pageTitle = res;
+    // })
 
     this.settings.load().then(() => {
       this.settingsReady = true;
