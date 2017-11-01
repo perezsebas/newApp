@@ -10,7 +10,8 @@
 <ion-content>
 
   <form [formGroup]="form" *ngIf="settingsReady">
-    <ion-list *ngIf="page == 'main'">
+    <!-- <ion-list *ngIf="page == 'main'"> -->
+    <ion-list>
       <ion-item>
         <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
         <ion-toggle formControlName="option1"></ion-toggle>
@@ -23,9 +24,9 @@
 
       <ion-item>
         <ion-label>{{ 'LANGUAGE_OPTION' | translate }}</ion-label>
-        <ion-select formControlName="option3">
-          <ion-option value="1" checked="true">English</ion-option>
-          <ion-option value="2">Spanish</ion-option>
+        <ion-select formControlName="language">
+          <ion-option value="en">English</ion-option>
+          <ion-option value="es">Spanish</ion-option>
         </ion-select>
       </ion-item>
 

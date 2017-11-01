@@ -72,9 +72,6 @@ export class MyApp {
 
     this.initTranslate();
 
-    // translate.setDefaultLang('es');
-    // translate.use('es');
-
   }
 
   ionViewDidLoad() {

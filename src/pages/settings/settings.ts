@@ -28,16 +28,15 @@ export class SettingsPage {
   //   pageTitleKey: 'SETTINGS_PAGE_PROFILE'
   // };
 
-  page: string = 'main';
+  // page: string = 'main';
   // pageTitleKey: string = 'SETTINGS_TITLE';
   // pageTitle: string;
 
   // subSettings: any = SettingsPage;
 
   //Language variables
+  currentLanguage: string = this.translate.currentLang.valueOf();
   language: string;
-  english: number = 1;
-  spanish: number = 2;
 
   constructor(
     public navCtrl: NavController,
@@ -46,13 +45,15 @@ export class SettingsPage {
     public navParams: NavParams,
     public translate: TranslateService) {
 
-    }
+      // console.log(`Actual language: ${this.currentLanguage}`);
+
+  }
 
   _buildForm() {
     let group: any = {
       option1: [this.options.option1],
       option2: [this.options.option2],
-      option3: [this.options.option3]
+      language: [this.currentLanguage]
     };
 
     // switch (this.page) {
@@ -70,11 +71,16 @@ export class SettingsPage {
     this.form.valueChanges.subscribe((v) => {
       this.settings.merge(this.form.value);
 
-      this.language = this.form.controls.option3.value;
-      if(this.language === this.english.toString()){
-        this.translate.use('en');
-      }else if(this.language === this.spanish.toString()){
-        this.translate.use('es');
+      this.language = this.form.controls.language.value;
+      switch (this.language) {
+        case 'en':
+          this.translate.use('en');
+          this.currentLanguage = 'en';
+          break;
+        case 'es':
+          this.translate.use('es');
+          this.currentLanguage = 'es';
+          break;
       }
 
     });

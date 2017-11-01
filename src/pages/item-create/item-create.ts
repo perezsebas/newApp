@@ -75,7 +75,9 @@ export class ItemCreatePage {
       this.imageDataFB = imageData;
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+    if (event.target.files[0] !== undefined){
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   getProfileImageStyle() {
@@ -86,7 +88,7 @@ export class ItemCreatePage {
    * The user cancelled, so we dismiss without sending data back.
    */
   cancel() {
-    this.viewCtrl.dismiss();  
+    this.viewCtrl.dismiss();
   }
 
   /**

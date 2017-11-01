@@ -31,21 +31,16 @@ export class ItemDetailPage {
 
     this.item = navParams.get('item') || items.defaultItem;
 
-    //Get translated value
-    this.translate.get('USER_UPDATED').subscribe((res: string) => {
-      this.updateMessage = res;
-    });
-
-    //Get translated values
-    this.translate.get(['DELETE_BUTTON', 'DELETE_USER_CONFIRMATION', 'CANCEL_BUTTON', 'CONFIRMATION' ]).subscribe((res: string[]) => {  
-      this.deleteMessages = res;
-    });
-
   }
 
   updateItem(key: string, newText: string) {
     //Update values in Firebase DB
     this.db.list('users').update(key, { about: newText });
+
+    //Get translated value
+    this.translate.get('USER_UPDATED').subscribe((res: string) => {
+      this.updateMessage = res;
+    });
 
     //Show toast with confirmation message
     let toast = this.toastCtrl.create({
@@ -59,6 +54,12 @@ export class ItemDetailPage {
   }
 
   deleteItem(name: string, key: string) {
+
+    //Get translated values
+    this.translate.get(['DELETE_BUTTON', 'DELETE_USER_CONFIRMATION', 'CANCEL_BUTTON', 'CONFIRMATION' ]).subscribe((res: string[]) => {
+      this.deleteMessages = res;
+    });
+
     //Show alert with confirmation message
     let alert = this.alertCtrl.create({
       title: this.deleteMessages['CONFIRMATION'],
