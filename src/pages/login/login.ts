@@ -78,6 +78,17 @@ export class LoginPage {
       });
   }
 
+  logInWithFacebook() {
+    //Sign up with Facebook
+    let provider = new firebase.auth.FacebookAuthProvider();
+    this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
+        this.navCtrl.push(MainPage);
+      }).catch((err) => {
+        this.showToast(err);
+      });
+  }
+
   signOut() {
     //Sign out
     this.afAuth.auth.signOut()
