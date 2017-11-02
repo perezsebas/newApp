@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { MainPage } from '../../pages/pages';
-import { WelcomePage } from '../../pages/welcome/welcome';
+import { MainPage } from '../pages';
+import { WelcomePage } from '../welcome/welcome';
 
 import { User } from '../../providers/user';
 
@@ -20,8 +20,10 @@ export class LoginPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: { email: string, password: string } = {
-    email: 'perezsebas1@gmail.com',
-    password: '123456'
+    email: '',
+    password: ''
+    // email: 'testing@example.com',
+    // password: '123456'
   };
 
   // Our translated text strings
@@ -36,16 +38,18 @@ export class LoginPage {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
+
   }
 
   // Attempt to login in through our User service
   doLogin() {
     //Log in to Firebase Authentication
-    this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password).then((res) => {
-      this.navCtrl.push(MainPage);
-    }).catch((err) => {
-      this.showToast(this.loginErrorString);
-    });
+    this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
+      .then((res) => {
+        this.navCtrl.push(MainPage);
+      }).catch((err) => {
+        this.showToast(this.loginErrorString);
+      });
 
     // this.user.login(this.account).subscribe((resp) => {
     //   this.navCtrl.push(MainPage);
@@ -66,13 +70,12 @@ export class LoginPage {
   logInWithGoogle() {
     //Sign up with Google
     let provider = new firebase.auth.GoogleAuthProvider();
-    this.afAuth.auth.signInWithRedirect(provider)
-      .then( () => {
+    this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
         this.navCtrl.push(MainPage);
       }).catch((err) => {
         this.showToast(err);
       });
-      
   }
 
   signOut() {

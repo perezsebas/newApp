@@ -31,7 +31,7 @@
       </ion-item>
 
       <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+        <button ion-button color="light" block>{{ 'LOGIN_BUTTON' | translate }}</button>
       </div>
 
     </ion-list>
@@ -40,6 +40,12 @@
   <ion-buttons padding>
     <button ion-button color="danger" (click)="logInWithGoogle()" block>
       {{ 'LOGIN_GOOGLE_BUTTON' | translate }}
+    </button>
+  </ion-buttons>
+
+  <ion-buttons padding>
+    <button ion-button color="primary" (click)="logInWithFacebook()" block>
+      {{ 'LOGIN_FACEBOOK_BUTTON' | translate }}
     </button>
   </ion-buttons>
 

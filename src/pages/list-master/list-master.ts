@@ -9,6 +9,7 @@ import { Items } from '../../mocks/providers/items';
 import { Item } from '../../models/item';
 
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
 // import { FirebaseApp } from 'angularfire2';
@@ -28,6 +29,7 @@ export class ListMasterPage {
     public items: Items,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth,
     // public st: FirebaseApp,
     public db: AngularFireDatabase) {
     // this.currentItems = this.items.query();
@@ -47,18 +49,18 @@ export class ListMasterPage {
     //   });
     // });
 
-    
   }
 
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+
     let loader = this.loadingCtrl.create();
 
-    loader.present().then(()=>{
+    loader.present().then(() => {
       this.currentItems = this.db.list('users').snapshotChanges().map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));  
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
       });
       loader.dismiss();
     });
@@ -94,4 +96,5 @@ export class ListMasterPage {
       item: item
     });
   }
+
 }
