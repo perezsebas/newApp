@@ -10,10 +10,13 @@ declare var google: any;
   templateUrl: 'map.html'
 })
 export class MapPage {
-  
+
   @ViewChild('map') map;
 
-  constructor(private googleMaps: GoogleMaps, public navCtrl: NavController, public platform: Platform) { }
+  constructor(
+    private googleMaps: GoogleMaps,
+    public navCtrl: NavController,
+    public platform: Platform) { }
 
 
   ngAfterViewInit() {
