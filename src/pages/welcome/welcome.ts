@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
@@ -20,24 +20,33 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController,
-  public afAuth: AngularFireAuth) { }
+  constructor(
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth) { }
 
   ionViewDidLoad() {
-    this.afAuth.auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        // console.log(user);
-        this.redirectToMain();
-      } else {
-        // No user is signed in.
-        console.log('No user is signed in');
-      }
+    let loader = this.loadingCtrl.create();
+    loader.present().then(() => {
+      this.afAuth.auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          // console.log(user);
+          this.redirectToMain();
+        } else {
+          // No user is signed in.
+        }
+      });
+      loader.dismiss();
     });
   }
 
   redirectToMain() {
-    this.navCtrl.push(MainPage);
+    // this.navCtrl.push(MainPage);
+    this.navCtrl.setRoot(MainPage, {}, {
+      animate: true,
+      direction: 'forward'
+    });
   }
 
   login() {

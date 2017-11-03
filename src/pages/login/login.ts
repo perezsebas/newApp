@@ -70,23 +70,35 @@ export class LoginPage {
   logInWithGoogle() {
     //Sign up with Google
     let provider = new firebase.auth.GoogleAuthProvider();
-    this.afAuth.auth.signInWithPopup(provider)
-      .then((res) => {
-        this.navCtrl.push(MainPage);
-      }).catch((err) => {
-        this.showToast(err);
-      });
+
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+
+    this.afAuth.auth.signInWithRedirect(provider)
+    // this.afAuth.auth.signInWithPopup(provider)
+    // this.afAuth.auth.getRedirectResult()
+    //   .then(() => {
+    //     console.log('entro aca');
+    //     this.navCtrl.push(MainPage);
+    //   }).catch((err) => {
+    //     this.showToast(err);
+    //   });
   }
 
   logInWithFacebook() {
     //Sign up with Facebook
     let provider = new firebase.auth.FacebookAuthProvider();
-    this.afAuth.auth.signInWithPopup(provider)
-      .then((res) => {
-        this.navCtrl.push(MainPage);
-      }).catch((err) => {
-        this.showToast(err);
-      });
+
+    provider.addScope('user_birthday');
+    
+    this.afAuth.auth.signInWithRedirect(provider)
+    // this.afAuth.auth.signInWithPopup(provider)
+    // this.afAuth.auth.getRedirectResult()
+    //   .then(() => {
+    //     console.log('entro aca');
+    //     this.navCtrl.push(MainPage);
+    //   }).catch((err) => {
+    //     this.showToast(err);
+    //   });
   }
 
   signOut() {
