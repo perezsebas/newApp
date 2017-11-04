@@ -89,14 +89,13 @@ export class LoginPage {
 
   logInWithFacebook() {
 
-    this.facebook.login(['public_profile', 'user_friends','email'])
+    this.facebook.login(['email'])
       .then((response) => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
 
         firebase.auth().signInWithCredential(facebookCredential)
           .then((success) => {
-            console.log("Firebase success: " + JSON.stringify(success));
             this.navCtrl.push(MainPage);
           })
           .catch((error) => {
