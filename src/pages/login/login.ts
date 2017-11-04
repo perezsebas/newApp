@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+import { Facebook } from '@ionic-native/facebook';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -33,6 +35,7 @@ export class LoginPage {
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
+    private facebook: Facebook,
     public afAuth: AngularFireAuth) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -75,30 +78,50 @@ export class LoginPage {
 
     this.afAuth.auth.signInWithRedirect(provider)
     // this.afAuth.auth.signInWithPopup(provider)
-    // this.afAuth.auth.getRedirectResult()
-    //   .then(() => {
-    //     console.log('entro aca');
-    //     this.navCtrl.push(MainPage);
-    //   }).catch((err) => {
-    //     this.showToast(err);
-    //   });
+      // this.afAuth.auth.getRedirectResult()
+      // .then(() => {
+      //   console.log('entro aca');
+      //   this.navCtrl.push(MainPage);
+      // }).catch((err) => {
+      //   this.showToast(err);
+      // });
   }
 
   logInWithFacebook() {
-    //Sign up with Facebook
-    let provider = new firebase.auth.FacebookAuthProvider();
 
-    provider.addScope('user_birthday');
-    
-    this.afAuth.auth.signInWithRedirect(provider)
+    this.facebook.login(['email'])
+      .then((response) => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);
+
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then((success) => {
+            console.log("Firebase success: " + JSON.stringify(success));
+            this.navCtrl.push(MainPage);
+          })
+          .catch((error) => {
+            console.log("Firebase failure: " + JSON.stringify(error));
+          });
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+
+    // //Sign up with Facebook
+    // let provider = new firebase.auth.FacebookAuthProvider();
+
+    // provider.addScope('user_birthday');
+
+    // // this.afAuth.auth.signInWithRedirect(provider)
     // this.afAuth.auth.signInWithPopup(provider)
-    // this.afAuth.auth.getRedirectResult()
+    // // this.afAuth.auth.getRedirectResult()
     //   .then(() => {
     //     console.log('entro aca');
     //     this.navCtrl.push(MainPage);
     //   }).catch((err) => {
     //     this.showToast(err);
     //   });
+
   }
 
   signOut() {
