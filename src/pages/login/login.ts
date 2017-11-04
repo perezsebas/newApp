@@ -89,7 +89,7 @@ export class LoginPage {
 
   logInWithFacebook() {
 
-    this.facebook.login(['email'])
+    this.facebook.login(['public_profile', 'user_friends','email'])
       .then((response) => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
@@ -100,11 +100,11 @@ export class LoginPage {
             this.navCtrl.push(MainPage);
           })
           .catch((error) => {
-            this.showToast(error);
+            this.showToast('calling Auth: ' + error);
           });
       })
       .catch((error) => {
-        this.showToast(error);
+        this.showToast('FB login: ' + error);
       });
 
     // //Sign up with Facebook
