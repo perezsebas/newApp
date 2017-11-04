@@ -78,13 +78,13 @@ export class LoginPage {
 
     this.afAuth.auth.signInWithRedirect(provider)
     // this.afAuth.auth.signInWithPopup(provider)
-      // this.afAuth.auth.getRedirectResult()
-      // .then(() => {
-      //   console.log('entro aca');
-      //   this.navCtrl.push(MainPage);
-      // }).catch((err) => {
-      //   this.showToast(err);
-      // });
+    // this.afAuth.auth.getRedirectResult()
+    // .then(() => {
+    //   console.log('entro aca');
+    //   this.navCtrl.push(MainPage);
+    // }).catch((err) => {
+    //   this.showToast(err);
+    // });
   }
 
   logInWithFacebook() {
@@ -100,11 +100,11 @@ export class LoginPage {
             this.navCtrl.push(MainPage);
           })
           .catch((error) => {
-            console.log("Firebase failure: " + JSON.stringify(error));
+            this.showToast(error);
           });
       })
       .catch((error) => {
-        console.log(error)
+        this.showToast(error);
       });
 
     // //Sign up with Facebook
