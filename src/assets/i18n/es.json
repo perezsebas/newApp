@@ -34,6 +34,8 @@
   "SETTINGS_OPTION1": "Opción 1",
   "SETTINGS_OPTION2": "Opción 2",
   "LANGUAGE_OPTION": "Idioma",
+  "LANGUAGE_OPTION_ENGLISH": "Inglés",
+  "LANGUAGE_OPTION_SPANISH": "Español",
   "SETTINGS_OPTION4": "Opción 4",
 
   "SETTINGS_PROFILE_BUTTON": "Editar Perfil",
@@ -70,11 +72,11 @@
   "SEARCH_TITLE": "Buscar",
   "SEARCH_PLACEHOLDER" : "Buscar lista de items, e.j. \"Donald Duck\"",
   
-    "USER_UPDATED": "Usuario actualizado correctamente", 
+  "USER_UPDATED": "Usuario actualizado correctamente", 
   
-    "DELETE_USER_CONFIRMATION": "Está seguro de eliminar este usuario?", 
+  "DELETE_USER_CONFIRMATION": "Está seguro de eliminar este usuario?", 
   
-    "CONFIRMATION": "Confirmación",
+  "CONFIRMATION": "Confirmación",
   
-    "LOADING_MESSAGE": "Cargando"
+  "LOADING_MESSAGE": "Cargando"
 }

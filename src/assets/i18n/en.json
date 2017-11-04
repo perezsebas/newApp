@@ -34,6 +34,8 @@
   "SETTINGS_OPTION1": "Option 1",
   "SETTINGS_OPTION2": "Option 2",
   "LANGUAGE_OPTION": "Language",
+  "LANGUAGE_OPTION_ENGLISH": "English",
+  "LANGUAGE_OPTION_SPANISH": "Spanish",
   "SETTINGS_OPTION4": "Option 4",
 
   "SETTINGS_PROFILE_BUTTON" : "Edit Profile",
