@@ -96,4 +96,8 @@
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="MAX_STORE" value="2" />
     </plugin>
+    <plugin name="cordova-plugin-googlemaps" spec="^2.2.5">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC-G9fBLZ8DD13w7yv9LyzkRjiOA4DJdvo" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyBSjSZYCkMb1FHmhqxrvkn1XlJJmqKgnCY" />
+    </plugin>
 </widget>
