@@ -31,7 +31,8 @@ export class LoginPage {
   // Our translated text strings
   private loginErrorString: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
@@ -89,7 +90,7 @@ export class LoginPage {
 
   logInWithFacebook() {
 
-    this.facebook.login(['public_profile'])
+    this.facebook.login(['email'])
       .then((response) => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
